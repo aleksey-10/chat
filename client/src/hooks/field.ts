@@ -5,5 +5,7 @@ export const useField = (initialValue = '') => {
 
   const validate = () => Boolean(input.value.trim());
 
-  return { input, validate };
+  const reset = () => input.value = '';
+
+  return { input, validate, reset };
 };

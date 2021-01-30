@@ -1,21 +1,32 @@
 import express from 'express';
 import config from 'config';
-import chatRouter from './routes/chat';
 import cors from 'cors';
-
-const app = express();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-
-io.on('connection', () => {
-  console.log('connected');
-});
-
+import { Socket } from 'dgram';
+import chatRouter from './routes/chat';
+import { messages } from './data/index';
+import Message from './interfaces/Message';
 
 const PORT: number = config.get('port');
 
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http, {
+  cors: { origin: '*'},
+});
+
+app.use(express.json());
 app.use(cors());
+
 app.use('/api/chat', chatRouter);
+
+io.on('connection', (socket: Socket) => {
+  socket.on('message', ({userName, text}: Message) => {
+    const message = { id: Date.now(), userName, text };
+
+    messages.push(message);
+    io.emit('message', message);
+  })
+});
 
 try {
   http.listen(PORT, () => {

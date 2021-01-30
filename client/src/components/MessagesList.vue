@@ -6,16 +6,16 @@
       class="item"
       :class="{item: true, 'item--user-message': message.userName === userName}"
     >
-      <small class="name">
+      <span class="name">
         <strong>{{message.userName}}</strong>
-      </small>
+      </span>
       <p class="message">{{ message.text }}</p>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import Message from '../interfaces/Message';
 
 export default defineComponent({
@@ -55,6 +55,6 @@ export default defineComponent({
   }
 
   .message {
-    font-size: 0.75rem;
+    margin: 8px 0;
   }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <form class="form" @submit.prevent="handleSubmit">
-    <textarea @input="inputHandler" class="textarea" v-model="inputValue"></textarea>
+    <textarea
+      @input="inputHandler"
+      class="textarea"
+      v-model="inputValue"
+      @keyup.enter="handleSubmit"
+    ></textarea>
     <button
       type="submit"
       class="button"
@@ -30,6 +35,7 @@ export default defineComponent({
     const handleSubmit = () => {
       if (canSendMessage.value) {
         props.onSubmit(field.input.value.trim());
+        field.reset();
       }
     }
 

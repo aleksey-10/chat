@@ -13,16 +13,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import MessagesList from './components/MessagesList.vue';
 import NameInput from './components/NameInput.vue';
 import MessageInput from './components/MessageInput.vue';
 import { useUserName } from './hooks/userName';
 import Message from './interfaces/Message';
-
-//interface Messages {
-//  data: Message[];
-//}
+import { io } from 'socket.io-client';
 
 export default defineComponent({
   name: 'App',
@@ -33,17 +30,21 @@ export default defineComponent({
   },
   setup() {
     const { userName, handleLogout, newNameHandler } = useUserName();
-    const messages = reactive<Message[]>([]);
+    const messages = ref<Message[]>([]);
+    const socket = io('ws://localhost:5000');
 
     onMounted(() => {
       fetch('http://localhost:5000/api/chat')
         .then(res => res.json())
-        .then(data => messages.push(...data.messages));
+        .then(data => messages.value = data.messages);
+    });
+
+    socket.on('message', (message: Message) => {
+      messages.value = [...messages.value, message];
     });
 
     const addMessage = (text: string) => {
-      messages.push({ id: Date.now(), userName: userName.value, text });
-      console.log(text);
+      socket.emit('message', {text, userName: userName.value });
     };
 
     return {
