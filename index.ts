@@ -1,11 +1,12 @@
 import express from 'express';
-import config from 'config';
+//import config from 'config';
 import cors from 'cors';
 import { Socket } from 'dgram';
 import { messages } from './data/index';
 import Message from './interfaces/Message';
 
-const PORT: number = config.get('port');
+//const PORT: number = config.get('port');
+const PORT: number = 5000;
 
 const app = express();
 const http = require('http').createServer(app);

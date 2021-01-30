@@ -4,10 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const config_1 = __importDefault(require("config"));
+//import config from 'config';
 const cors_1 = __importDefault(require("cors"));
 const index_1 = require("./data/index");
-const PORT = config_1.default.get('port');
+//const PORT: number = config.get('port');
+const PORT = 5000;
 const app = express_1.default();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
