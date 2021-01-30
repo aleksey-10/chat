@@ -31,10 +31,15 @@ export default defineComponent({
   setup() {
     const { userName, handleLogout, newNameHandler } = useUserName();
     const messages = ref<Message[]>([]);
-    const socket = io('ws://localhost:5000');
+    const url = `${
+      process.env.HOST || 'localhost'
+    }:${
+      process.env.PORT || 5000
+    }`;
+    const socket = io(`ws:${url}`);
 
     onMounted(() => {
-      fetch('http://localhost:5000/api/chat')
+      fetch(`http://${url}/api/chat`)
         .then(res => res.json())
         .then(data => messages.value = data.messages);
     });
