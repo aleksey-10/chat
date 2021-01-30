@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('client/dist'));
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile('client/dist/index.html');
 });
 
