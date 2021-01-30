@@ -17,7 +17,7 @@ app.use(express_1.default.json());
 app.use(cors_1.default());
 app.use(express_1.default.static('client/dist'));
 app.get('*', (req, res) => {
-    res.sendFile('./client/dist/index.html');
+    res.sendFile('client/dist/index.html');
 });
 app.get('/api/chat', (req, res) => {
     res.json({ messages: index_1.messages });

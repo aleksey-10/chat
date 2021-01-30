@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.static('client/dist'));
 
 app.get('*', (req, res) => {
-  res.sendFile('./client/dist/index.html');
+  res.sendFile('client/dist/index.html');
 });
 
 app.get('/api/chat', (req, res) => {
