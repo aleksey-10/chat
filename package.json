@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.ts",
+    "start": "ts-node index.ts",
     "client": "npm run serve --prefix client",
     "server": "nodemon index.ts",
     "dev": "concurrently \"npm run server\" \"npm run client\""

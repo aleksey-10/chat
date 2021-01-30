@@ -2,7 +2,6 @@ import express from 'express';
 import config from 'config';
 import cors from 'cors';
 import { Socket } from 'dgram';
-import chatRouter from './routes/chat';
 import { messages } from './data/index';
 import Message from './interfaces/Message';
 
@@ -16,8 +15,15 @@ const io = require('socket.io')(http, {
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('client/dist'));
 
-app.use('/api/chat', chatRouter);
+app.get('*', (req, res) => {
+  res.sendFile('./client/dist/index.html');
+});
+
+app.get('/api/chat', (req, res) => {
+  res.json({ messages });
+});
 
 io.on('connection', (socket: Socket) => {
   socket.on('message', ({userName, text}: Message) => {
