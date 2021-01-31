@@ -5,6 +5,7 @@
       class="textarea"
       v-model="inputValue"
       @keyup.enter="handleSubmit"
+      placeholder="You message..."
     ></textarea>
     <button
       type="submit"
@@ -17,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, PropType, ref, toRefs, watch } from "vue";
 import { useField } from "../hooks/field";
 
 export default defineComponent({
@@ -26,11 +27,15 @@ export default defineComponent({
       type: Function as PropType<(messageText: string) => void>,
       required: true,
     },
-    userName: String,
+    userName: {
+      type: String,
+      required: true,
+    },
   },
   setup(props) {
     const field = useField();
-    const canSendMessage = ref<boolean>(Boolean(props.userName));
+    const { userName } = toRefs(props);
+    const canSendMessage = ref<boolean>(Boolean(userName.value));
 
     const handleSubmit = () => {
       if (canSendMessage.value) {
@@ -39,9 +44,13 @@ export default defineComponent({
       }
     }
 
-    const inputHandler = () => {
-      canSendMessage.value = field.validate() && Boolean(props.userName);
-    }
+    const checkCanSendMessage = () => {
+      canSendMessage.value = field.validate() && Boolean(userName.value);
+    };
+
+    watch(userName, checkCanSendMessage);
+
+    const inputHandler = checkCanSendMessage;
 
     return {
       handleSubmit,

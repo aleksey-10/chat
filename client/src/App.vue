@@ -3,7 +3,7 @@
     <main class="chat__settings">
       <h1>Welcome, {{userName || 'guest'}}</h1>
       <name-input v-if="!userName" @submit="newNameHandler"></name-input>
-      <button v-else @click="handleLogout">Change name</button>
+      <button v-else @click="handleLogout">Log out</button>
     </main>
     <aside class="chat__messages">
       <messages-list :userName="userName" :messages="messages"></messages-list>
@@ -114,6 +114,8 @@ button {
   display: flex;
   justify-content: flex-end;
   height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   &__settings {
     flex-grow: 1;
@@ -139,7 +141,11 @@ button {
     &__settings {
       flex-grow: 0;
       height: auto;
-      margin-bottom: 16px;
+      margin: 16px 0;
+
+      h1 {
+        display: none;
+      }
     }
 
     &__messages {
