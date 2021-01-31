@@ -1,5 +1,5 @@
 <template>
-  <ul class="list">
+  <ul class="list" ref="list">
     <li
       v-for="message in messages"
       :key="message.id"
@@ -27,8 +27,15 @@ export default defineComponent({
     messages: {
       type: Array as PropType<Message[]>,
       required: true,
-    }
+    },
   },
+  watch: {
+    messages() {
+      const list = this.$refs.list as any;
+
+      list.scroll({ top: list.scrollHeight + 48 })
+    }
+  }
 });
 </script>
 

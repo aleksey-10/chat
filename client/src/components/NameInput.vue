@@ -6,7 +6,7 @@
       class="input"
       v-model="userName"
     >
-    <button type="Submit">OK</button>
+    <button type="Submit" class="button">OK</button>
   </form>
 </template>
 
@@ -40,7 +40,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  input {
+  .form {
+    display: flex;
+    align-items: center;
+  }
+
+  .button,
+  .input {
+    height: 32px;
+  }
+
+  .input {
     padding: 8px 16px;
   }
 </style>

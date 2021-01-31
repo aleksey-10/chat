@@ -40,7 +40,7 @@ export default defineComponent({
     }
 
     const inputHandler = () => {
-      canSendMessage.value = field.validate() || !props.userName;
+      canSendMessage.value = field.validate() && Boolean(props.userName);
     }
 
     return {
@@ -74,7 +74,8 @@ export default defineComponent({
   display: block;
   width: 100%;
   font-family: inherit;
-  border: 1px solid lightgray;
+  border: none;
+  border-top: var(--border);
 }
 
 </style>

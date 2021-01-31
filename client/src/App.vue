@@ -85,9 +85,29 @@ body {
   color: #2c3e50;
 }
 
+:root {
+  --border: 1px solid #7ca7d3;
+  --primary-color: #d7e4f1;
+  --primary-color-dark: #7ca7d3;
+}
+
+button,
+input {
+  border: var(--border);
+}
+
 button {
   cursor: pointer;
+  border-radius: 0;
+  background-color: var(--primary-color);
   padding: 8px;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+
+  &:hover:not([disabled]) {
+    background-color: var(--primary-color-dark);
+    color: #fff;
+  }
 }
 
 .chat {
@@ -109,22 +129,25 @@ button {
     flex-direction: column;
     max-width: 400px;
     width: 100%;
-    border: 1px solid #e3e3e3;
+    border: var(--border);
   }
 
   @media (max-width: 768px) {
     flex-direction: column;
+    justify-content: space-between;
 
     &__settings {
-      height: auto;
       flex-grow: 0;
+      height: auto;
       margin-bottom: 16px;
-      overflow: hidden;
     }
 
     &__messages {
       flex-grow: 1;
       max-width: unset;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
   }
 }
