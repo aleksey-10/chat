@@ -31,11 +31,7 @@ export default defineComponent({
   setup() {
     const { userName, handleLogout, newNameHandler } = useUserName();
     const messages = ref<Message[]>([]);
-    const url = `${
-      process.env.HOST || 'localhost'
-    }:${
-      process.env.PORT || 5000
-    }`;
+    const url = `https://radiant-stream-54409.herokuapp.com/`;
     const socket = io(`ws:${url}`);
 
     onMounted(() => {
