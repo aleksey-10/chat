@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "npm run build --prefix client",
     "build:server": "tsc",
+    "build": "npm run build:server",
     "start": "node dist/index.js",
     "client": "npm run serve --prefix client",
     "server": "nodemon index.ts",
