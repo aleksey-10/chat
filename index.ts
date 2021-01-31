@@ -1,11 +1,9 @@
 import express from 'express';
-//import config from 'config';
 import cors from 'cors';
 import { Socket } from 'dgram';
 import { messages } from './data/index';
 import Message from './interfaces/Message';
 
-//const PORT: number = config.get('port');
 const PORT: number | string = process.env.PORT || 5000;
 
 const app = express();
@@ -16,11 +14,11 @@ const io = require('socket.io')(http, {
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static('client/dist'));
+//app.use(express.static('client/dist'));
 
-app.get('/', (req, res) => {
-  res.sendFile('client/dist/index.html');
-});
+//app.get('/', (req, res) => {
+//  res.sendFile('client/dist/index.html');
+//});
 
 app.get('/api/chat', (req, res) => {
   res.json({ messages });
