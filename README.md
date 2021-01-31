@@ -1,6 +1,6 @@
 # LIVE CHAT
 
-[DEMO](https://aleksey-10.github.io/online-store)
+[DEMO](https://aleksey-10.github.io/chat)
 
 ## Tech stack
 - Node js
