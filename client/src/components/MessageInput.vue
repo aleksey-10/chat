@@ -30,7 +30,7 @@ export default defineComponent({
   },
   setup(props) {
     const field = useField();
-    const canSendMessage = ref<boolean>(true);
+    const canSendMessage = ref<boolean>(Boolean(props.userName));
 
     const handleSubmit = () => {
       if (canSendMessage.value) {

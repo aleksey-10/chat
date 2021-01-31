@@ -5,6 +5,7 @@ export const useUserName = () => {
 
   const handleLogout = () => {
     userName.value = '';
+    localStorage.removeItem('userName');
   };
 
   const newNameHandler = (newName: string) => {
