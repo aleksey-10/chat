@@ -1,14 +1,11 @@
-#!/usr/bin/env sh
-# abort on errors
-set -e
 # build
 npm run build
-# navigate into the build output directory
-cd dist
-# if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
-git init
-git add -A
-git commit -m 'deploy'
-git push -f git@github.com:aleksey-10/chat.git main:gh-pages
-cd -
+
+git add -f ./dist
+git commit -m "build"
+git push --delete origin gh-pages
+git subtree --prefix dist push origin gh-pages
+git reset HEAD^ --soft
+rm -rf ./dist
+git reset -- ./dist
+
