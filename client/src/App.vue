@@ -31,11 +31,11 @@ export default defineComponent({
   setup() {
     const { userName, handleLogout, newNameHandler } = useUserName();
     const messages = ref<Message[]>([]);
-    const url = `https://radiant-stream-54409.herokuapp.com/`;
-    const socket = io(`ws:${url}`);
+    const url = `radiant-stream-54409.herokuapp.com`;
+    const socket = io(`wss://${url}`);
 
     onMounted(() => {
-      fetch(`http://${url}/api/chat`)
+      fetch(`https://${url}/api/chat`)
         .then(res => res.json())
         .then(data => messages.value = data.messages);
     });
